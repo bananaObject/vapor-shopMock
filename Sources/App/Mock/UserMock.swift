@@ -31,6 +31,16 @@ final class UserMock: Codable {
         self.bio = request.bio
     }
 
+    // Сбрассывание данных для теста
+    func resetUserInfo() {
+        self.firstname = "Toxic"
+        self.lastname = "Frog"
+        self.email = "toxicFrog@gmail.com"
+        self.gender = "m"
+        self.credit_card = "9872389-2424-234224-234"
+        self.bio = "This is good! I think I will switch to another language"
+    }
+
     // краткие данные юзера
     func getInfoForResponse() -> UserResponse {
         UserResponse(id_user: self.id_user,

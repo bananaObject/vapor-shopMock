@@ -11,7 +11,8 @@ func routes(_ app: Application) throws {
     app.post("logout", use: authController.logout)
 
     app.post("registration", use: userController.create)
-    app.post("changeUserInfo", use: userController.changeUserData)
+    app.post("changeUserInfo", use: userController.changeUserInfo)
+    app.get("resetUserInfo", use: userController.resetUserInfo)
 
     app.get("catalog", use: catalogController.catalog)
     app.get("product", use: catalogController.product)

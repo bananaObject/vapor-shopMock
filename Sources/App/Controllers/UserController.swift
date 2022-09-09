@@ -33,7 +33,7 @@ class UserController {
         return req.eventLoop.future(response)
     }
 
-    func changeUserData(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+    func changeUserInfo(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
         guard let body = try? req.content.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
@@ -51,6 +51,24 @@ class UserController {
         dbMock?.user.updateUserInfo(body)
 
         let response = ResultResponse(message: "Данные изменены!")
+
+        return req.eventLoop.future(response)
+    }
+
+    func resetUserInfo(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+        guard let body = try? req.content.decode(ResetUserInfoRequest.self) else {
+            throw Abort(.badRequest)
+        }
+
+        // выдает ошибку если токен не совпадает
+        guard body.auth_token == dbMock?.authToken else {
+            throw Abort(.badRequest, reason: "Bad auth token")
+        }
+
+        // Сбрасываем данные в фиктивной бд.
+        dbMock?.user.resetUserInfo()
+
+        let response = ResultResponse(message: "Данные сброшены!")
 
         return req.eventLoop.future(response)
     }
