@@ -21,8 +21,17 @@ class CatalogController {
         }
 
         // выдает ошибку если отсутствует каталог в фиктивной бд
-        guard let catalog = dbMock?.catalog else {
+        guard let mockCatalog  = dbMock?.catalog else {
             throw Abort(.internalServerError)
+        }
+
+        let catalog: [ProductResponse]
+
+        // если есть категория то фильтруется каталог
+        if let category = body.id_category {
+            catalog = mockCatalog.filter{ $0.id_category == category }
+        } else {
+            catalog = mockCatalog
         }
 
         let userPage = body.page_number

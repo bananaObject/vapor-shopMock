@@ -9,5 +9,5 @@ import Vapor
 
 struct CatalogRequst: Content {
     let page_number : Int
-    let id_category : Int
+    let id_category : Int?
 }

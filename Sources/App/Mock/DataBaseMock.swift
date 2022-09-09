@@ -16,6 +16,7 @@ class DataBaseMock {
         for index in (1...630) {
             array.append(
                 ProductResponse(id_product: index,
+                                id_category: index % 2 == 0 ? 1 : 2,
                                 product_name: "Товар \(index)",
                                 price: Int.random(in: 0...100_000),
                                 product_description: "Мощный товар \(index)")
