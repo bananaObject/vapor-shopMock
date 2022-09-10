@@ -25,10 +25,10 @@ class AuthController {
     /// - Parameter req: request
     /// - Returns: User info and auth token.
     func login(_ req: Request) throws -> EventLoopFuture<LoginResponse> {
-        guard let body = try? req.query.decode(LoginRequest.self) else {
+        guard let body = try? req.content.decode(LoginRequest.self) else {
             throw Abort(.badRequest)
         }
-        
+
         // Выдает ошибку если логин и пароль не совпадает с фиктивной бд
         guard dbMock?.user.login == body.login
                 && dbMock?.user.password == body.password
@@ -60,7 +60,7 @@ class AuthController {
     /// - Parameter req: request
     /// - Returns: result message
     func logout(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.query.decode(LogoutRequest.self) else {
+        guard let body = try? req.content.decode(LogoutRequest.self) else {
             throw Abort(.badRequest)
         }
         
