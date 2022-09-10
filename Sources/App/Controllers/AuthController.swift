@@ -16,7 +16,7 @@ class AuthController {
     
     /// Login.
     ///
-    /// query string:
+    /// json body:
     ///  - login
     ///  - password
     ///
@@ -52,7 +52,8 @@ class AuthController {
     }
     
     /// Logout.
-    /// query string:
+    /// 
+    /// json body:
     /// - id
     /// - auth_token
     ///

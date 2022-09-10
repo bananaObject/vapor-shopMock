@@ -21,10 +21,11 @@ class CatalogController {
     /// query string:
     /// - page_number  - pagination (required)
     /// - category  - filter by category
+    ///
     /// - Parameter req: Request
     /// - Returns: Massive products.
     func catalog(_ req: Request) throws -> EventLoopFuture<CatalogResponse> {
-        guard let body = try? req.content.decode(CatalogRequst.self) else {
+        guard let body = try? req.query.decode(CatalogRequst.self) else {
             throw Abort(.badRequest)
         }
 
@@ -65,6 +66,7 @@ class CatalogController {
     ///
     /// parameters:
     /// - id - finds the product id from the parameter.
+    ///
     /// - Parameter req: request
     /// - Returns: product
     func product(_ req: Request) throws -> EventLoopFuture<ProductResponse> {

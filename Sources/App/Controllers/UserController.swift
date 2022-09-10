@@ -16,7 +16,7 @@ class UserController {
 
     /// Сreate user.
     ///
-    /// query string:
+    /// json body:
     /// - login
     /// - password
     /// - firstname
@@ -50,7 +50,7 @@ class UserController {
 
     /// Change user info.
     ///
-    /// query string:
+    /// json body:
     /// - login
     /// - password
     /// - firstname
@@ -87,7 +87,7 @@ class UserController {
 
     /// Reset user info.
     ///
-    /// query string:
+    /// json body:
     /// - auth_token
     ///
     /// Token verification.
