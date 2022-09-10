@@ -13,7 +13,17 @@ class AuthController {
     init(_ dbMock: DataBaseMock) {
         self.dbMock = dbMock
     }
-    
+
+    /// Login.
+    ///
+    /// query string:
+    ///  - login
+    ///  - password
+    ///
+    ///  Validates login and pass.
+    ///
+    /// - Parameter req: request
+    /// - Returns: User info and auth token.
     func login(_ req: Request) throws -> EventLoopFuture<LoginResponse> {
         guard let body = try? req.content.decode(LoginRequest.self) else {
             throw Abort(.badRequest)
@@ -38,7 +48,15 @@ class AuthController {
         return req.eventLoop.future(response)
     }
 
-    func logout(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+    /// Logout.
+    /// query string:
+    /// - id_user
+    /// - auth_token
+    ///
+    /// Checking the validity of the user id and token.
+    /// - Parameter req: request
+    /// - Returns: result message
+    func logout(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
         guard let body = try? req.content.decode(LogoutRequest.self) else {
             throw Abort(.badRequest)
         }
@@ -50,7 +68,7 @@ class AuthController {
             throw Abort(.unauthorized, reason: "Bad id or authToken")
         }
 
-        let response = ResultResponse(message: "Вы успешно вышли из приложения")
+        let response = MessageResponse(message: "Вы успешно вышли из приложения")
 
         return req.eventLoop.future(response)
     }

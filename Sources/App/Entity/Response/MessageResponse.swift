@@ -7,6 +7,6 @@
 
 import Vapor
 
-struct ResultResponse: Content {
+struct MessageResponse: Content {
     let message: String
 }

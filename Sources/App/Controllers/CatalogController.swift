@@ -9,12 +9,20 @@ import Vapor
 
 class CatalogController {
     weak private var dbMock: DataBaseMock?
+    /// Number of elements on the screen
     private let productOnPage = 25
 
     init(_ dbMock: DataBaseMock) {
         self.dbMock = dbMock
     }
 
+    /// Catalog product.
+    ///
+    /// query string:
+    /// - page_number  - pagination (required)
+    /// - id_category  - filter by category
+    /// - Parameter req: Request
+    /// - Returns: Massive products.
     func catalog(_ req: Request) throws -> EventLoopFuture<CatalogResponse> {
         guard let body = try? req.content.decode(CatalogRequst.self) else {
             throw Abort(.badRequest)
@@ -35,7 +43,7 @@ class CatalogController {
         }
 
         let userPage = body.page_number
-        // Максимальная страница
+        // Последняя страница
         let maxPage = Int((Double(catalog.count) / Double(productOnPage)).rounded(.up))
 
         // выдает ошибку если выбранная страница больше максимальной
@@ -53,8 +61,14 @@ class CatalogController {
     }
 
 
+    /// Product.
+    ///
+    /// parameters:
+    /// - id - finds the product id from the parameter.
+    /// - Parameter req: request
+    /// - Returns: product
     func product(_ req: Request) throws -> EventLoopFuture<ProductResponse> {
-        guard let body = try? req.content.decode(ProductRequest.self) else {
+        guard let id = req.parameters.get("id") else {
             throw Abort(.badRequest)
         }
 
@@ -64,7 +78,7 @@ class CatalogController {
         }
 
         // выдает ошибку если отсутствует товар в фиктивной бд
-        guard let response = catalog.first(where: { $0.id_product == body.id_product }) else {
+        guard let response = catalog.first(where: { $0.id_product == Int(id) }) else {
             throw Abort(.badRequest, reason: "Такого товар не сущствует")
         }
 

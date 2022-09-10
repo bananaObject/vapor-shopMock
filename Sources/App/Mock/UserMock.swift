@@ -21,7 +21,8 @@ final class UserMock: Codable {
     var credit_card: String = "9872389-2424-234224-234"
     var bio: String = "This is good! I think I will switch to another language"
 
-    // обновление данных
+    /// User info update.
+    /// - Parameter request: request
     func updateUserInfo(_ request: UserDataRequest ) {
         self.firstname = request.firstname
         self.lastname = request.lastname
@@ -31,7 +32,8 @@ final class UserMock: Codable {
         self.bio = request.bio
     }
 
-    // Сбрассывание данных для теста
+
+    /// Reset user info (for test).
     func resetUserInfo() {
         self.firstname = "Toxic"
         self.lastname = "Frog"
@@ -41,7 +43,7 @@ final class UserMock: Codable {
         self.bio = "This is good! I think I will switch to another language"
     }
 
-    // краткие данные юзера
+    /// User summary
     func getInfoForResponse() -> UserResponse {
         UserResponse(id_user: self.id_user,
                      login: self.login,

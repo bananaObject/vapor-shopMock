@@ -7,13 +7,13 @@ func routes(_ app: Application) throws {
     let authController = AuthController(dbMock)
     let catalogController = CatalogController(dbMock)
     
-    app.post("login", use: authController.login)
-    app.post("logout", use: authController.logout)
+    app.post("auth", "login", use: authController.login)
+    app.post("auth", "logout", use: authController.logout)
 
-    app.post("registration", use: userController.create)
-    app.post("changeUserInfo", use: userController.changeUserInfo)
-    app.get("resetUserInfo", use: userController.resetUserInfo)
+    app.post("user", "registration", use: userController.create)
+    app.post("user", "changeInfo", use: userController.changeInfo)
+    app.get("user", "resetInfo", use: userController.resetInfo)
 
     app.get("catalog", use: catalogController.catalog)
-    app.get("product", use: catalogController.product)
+    app.get("catalog","product", ":id", use: catalogController.product)
 }

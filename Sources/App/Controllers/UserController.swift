@@ -14,7 +14,22 @@ class UserController {
         self.dbMock = dbMock
     }
 
-    func create(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+    /// Сreate user.
+    ///
+    /// query string:
+    /// - login
+    /// - password
+    /// - firstname
+    /// - lastname
+    /// - email
+    /// - gender
+    /// - credit_card
+    /// - bio
+    ///
+    /// Checking for empty fields.
+    /// - Parameter req: request
+    /// - Returns: result message
+    func create(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
         guard let body = try? req.content.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
@@ -28,12 +43,27 @@ class UserController {
             throw Abort(.badRequest, reason: "Empty required fields")
         }
         
-        let response = ResultResponse(message: "Регистрация прошла успешно!")
+        let response = MessageResponse(message: "Регистрация прошла успешно!")
 
         return req.eventLoop.future(response)
     }
 
-    func changeUserInfo(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+    /// Change user info.
+    ///
+    /// query string:
+    /// - login
+    /// - password
+    /// - firstname
+    /// - lastname
+    /// - email
+    /// - gender
+    /// - credit_card
+    /// - bio
+    ///
+    /// Checking for empty fields.
+    /// - Parameter req: request
+    /// - Returns: result message
+    func changeInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
         guard let body = try? req.content.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
@@ -50,12 +80,20 @@ class UserController {
         // изменяем данные в фиктивной бд.
         dbMock?.user.updateUserInfo(body)
 
-        let response = ResultResponse(message: "Данные изменены!")
+        let response = MessageResponse(message: "Данные изменены!")
 
         return req.eventLoop.future(response)
     }
 
-    func resetUserInfo(_ req: Request) throws -> EventLoopFuture<ResultResponse> {
+    /// Reset user info.
+    ///
+    /// query string:
+    /// - auth_token
+    ///
+    /// Token verification.
+    /// - Parameter req: request
+    /// - Returns: result message
+    func resetInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
         guard let body = try? req.content.decode(ResetUserInfoRequest.self) else {
             throw Abort(.badRequest)
         }
@@ -68,7 +106,7 @@ class UserController {
         // Сбрасываем данные в фиктивной бд.
         dbMock?.user.resetUserInfo()
 
-        let response = ResultResponse(message: "Данные сброшены!")
+        let response = MessageResponse(message: "Данные сброшены!")
 
         return req.eventLoop.future(response)
     }
