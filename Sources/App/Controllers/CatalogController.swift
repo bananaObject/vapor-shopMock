@@ -20,11 +20,11 @@ class CatalogController {
     ///
     /// query string:
     /// - page_number  - pagination (required)
-    /// - id_category  - filter by category
+    /// - category  - filter by category
     /// - Parameter req: Request
     /// - Returns: Massive products.
     func catalog(_ req: Request) throws -> EventLoopFuture<CatalogResponse> {
-        guard let body = try? req.content.decode(CatalogRequst.self) else {
+        guard let body = try? req.query.decode(CatalogRequst.self) else {
             throw Abort(.badRequest)
         }
 
@@ -37,7 +37,7 @@ class CatalogController {
 
         // если есть категория то фильтруется каталог
         if let category = body.id_category {
-            catalog = mockCatalog.filter{ $0.id_category == category }
+            catalog = mockCatalog.filter{ $0.category == category }
         } else {
             catalog = mockCatalog
         }
@@ -78,8 +78,8 @@ class CatalogController {
         }
 
         // выдает ошибку если отсутствует товар в фиктивной бд
-        guard let response = catalog.first(where: { $0.id_product == Int(id) }) else {
-            throw Abort(.badRequest, reason: "Такого товар не сущствует")
+        guard let response = catalog.first(where: { $0.id == Int(id) }) else {
+            throw Abort(.badRequest, reason: "This product does not exist")
         }
 
         return req.eventLoop.future(response)

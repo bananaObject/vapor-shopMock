@@ -30,7 +30,7 @@ class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func create(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(UserDataRequest.self) else {
+        guard let body = try? req.query.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
 
@@ -64,7 +64,7 @@ class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func changeInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(UserDataRequest.self) else {
+        guard let body = try? req.query.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
 
@@ -94,12 +94,12 @@ class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func resetInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(ResetUserInfoRequest.self) else {
+        guard let body = try? req.query.decode(ResetUserInfoRequest.self) else {
             throw Abort(.badRequest)
         }
 
         // выдает ошибку если токен не совпадает
-        guard body.auth_token == dbMock?.authToken else {
+        guard body.auth_token == dbMock?.user.authToken else {
             throw Abort(.badRequest, reason: "Bad auth token")
         }
 

@@ -9,16 +9,17 @@ import Foundation
 
 /// Фиктивные данные юзера будто из бд.
 final class UserMock: Codable {
-    var id_user: Int = 0
+    var id: Int = 0
 
     var login: String  = "admin"
     var password: String = "admin"
+    var authToken: String = "905ef89d-25a4-4255-902f-fafd4f6a9774"
 
     var firstname: String = "Toxic"
     var lastname: String = "Frog"
     var email: String = "toxicFrog@gmail.com"
     var gender: String = "m"
-    var credit_card: String = "9872389-2424-234224-234"
+    var creditCard: String = "9872389-2424-234224-234"
     var bio: String = "This is good! I think I will switch to another language"
 
     /// User info update.
@@ -28,10 +29,9 @@ final class UserMock: Codable {
         self.lastname = request.lastname
         self.email = request.email
         self.gender = request.gender
-        self.credit_card = request.credit_card
+        self.creditCard = request.credit_card
         self.bio = request.bio
     }
-
 
     /// Reset user info (for test).
     func resetUserInfo() {
@@ -39,13 +39,13 @@ final class UserMock: Codable {
         self.lastname = "Frog"
         self.email = "toxicFrog@gmail.com"
         self.gender = "m"
-        self.credit_card = "9872389-2424-234224-234"
+        self.creditCard = "9872389-2424-234224-234"
         self.bio = "This is good! I think I will switch to another language"
     }
 
     /// User summary
     func getInfoForResponse() -> UserResponse {
-        UserResponse(id_user: self.id_user,
+        UserResponse(id: self.id,
                      login: self.login,
                      firstname: self.firstname,
                      lastname: self.lastname)

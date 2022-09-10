@@ -8,7 +8,7 @@
 import Vapor
 
 struct UserResponse: Content {
-    let id_user: Int
+    let id: Int
     let login: String
     let firstname: String
     let lastname: String
