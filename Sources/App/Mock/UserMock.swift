@@ -24,7 +24,7 @@ final class UserMock: Codable {
 
     /// User info update.
     /// - Parameter request: request
-    func updateUserInfo(_ request: UserDataRequest ) {
+    func updateUserInfo(_ request: UserInfoRequest ) {
         self.firstname = request.firstname
         self.lastname = request.lastname
         self.email = request.email

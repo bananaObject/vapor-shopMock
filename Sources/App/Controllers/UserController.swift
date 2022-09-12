@@ -7,7 +7,7 @@
 
 import Vapor
 
-class UserController {
+final class UserController {
     weak private var dbMock: DataBaseMock?
 
     init(_ dbMock: DataBaseMock) {
@@ -30,7 +30,7 @@ class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func create(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(UserDataRequest.self) else {
+        guard let body = try? req.content.decode(UserInfoRequest.self) else {
             throw Abort(.badRequest)
         }
 
@@ -64,7 +64,7 @@ class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func changeInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(UserDataRequest.self) else {
+        guard let body = try? req.content.decode(UserInfoRequest.self) else {
             throw Abort(.badRequest)
         }
 

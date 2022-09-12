@@ -7,7 +7,7 @@
 
 import Vapor
 
-class AuthController {
+final class AuthController {
     weak private var dbMock: DataBaseMock?
     
     init(_ dbMock: DataBaseMock) {

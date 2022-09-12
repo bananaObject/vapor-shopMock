@@ -7,10 +7,10 @@
 
 import Vapor
 
-class CatalogController {
+final class CatalogController {
     weak private var dbMock: DataBaseMock?
     /// Number of elements on the screen
-    private let productOnPage = 25
+    private let itemOnPage = Constants.itemOnPage
 
     init(_ dbMock: DataBaseMock) {
         self.dbMock = dbMock
@@ -34,7 +34,7 @@ class CatalogController {
             throw Abort(.internalServerError)
         }
 
-        let catalog: [ProductResponse]
+        let catalog: [Product]
 
         // если есть категория то фильтруется каталог
         if let category = body.id_category {
@@ -45,7 +45,7 @@ class CatalogController {
 
         let userPage = body.page_number
         // Последняя страница
-        let maxPage = Int((Double(catalog.count) / Double(productOnPage)).rounded(.up))
+        let maxPage = Int((Double(catalog.count) / Double(itemOnPage)).rounded(.up))
 
         // выдает ошибку если выбранная страница больше максимальной
         guard userPage <= maxPage && userPage > 0 else {
@@ -53,8 +53,8 @@ class CatalogController {
         }
 
         // срез каталога
-        let arrayProduct = catalog[
-            (userPage * productOnPage - productOnPage)..<(userPage == maxPage ? catalog.count : productOnPage * userPage)]
+        let arrayProduct: [ProductResponse] = catalog[
+            (userPage * itemOnPage - itemOnPage)..<(userPage == maxPage ? catalog.count : itemOnPage * userPage)].map { $0.getResponse() }
 
         let response = CatalogResponse(page_number: userPage, max_page: maxPage, products: Array(arrayProduct))
 
@@ -80,10 +80,10 @@ class CatalogController {
         }
 
         // выдает ошибку если отсутствует товар в фиктивной бд
-        guard let response = catalog.first(where: { $0.id == Int(id) }) else {
+        guard let product = catalog.first(where: { $0.id == Int(id) }) else {
             throw Abort(.badRequest, reason: "This product does not exist")
         }
 
-        return req.eventLoop.future(response)
+        return req.eventLoop.future(product.getResponse())
     }
 }

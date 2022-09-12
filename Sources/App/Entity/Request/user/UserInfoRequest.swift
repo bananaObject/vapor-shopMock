@@ -1,5 +1,5 @@
 //
-//  UserDataRequest.swift
+//  UserInfoRequest.swift
 //  
 //
 //  Created by Ke4a on 08.09.2022.
@@ -7,7 +7,7 @@
 
 import Vapor
 
-struct UserDataRequest: Content {
+struct UserInfoRequest: Content {
     var login: String
     var password: String
     var firstname: String
