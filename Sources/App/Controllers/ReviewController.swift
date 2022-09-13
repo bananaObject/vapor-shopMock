@@ -77,7 +77,7 @@ final class ReviewController {
             throw Abort(.forbidden, reason: "bad auth token")
         }
 
-        let response = ReviewResponse(id_user: dbMock?.user.id ?? 0, id_review: Int.random(in: 200...10000), text: body.text)
+        let response = ReviewResponse(id_user: dbMock?.user.id ?? 0, name_user: "\(dbMock?.user.firstname) \(dbMock?.user.lastname)", id_review: Int.random(in: 200...10000), text: body.text)
 
         dbMock?.catalog[index].reviews.append(response)
 
