@@ -9,7 +9,7 @@ import Vapor
 
 struct ReviewResponse: Content {
     let id_user: Int
-    let name_user: String
+    let user_name: String
     var id_review: Int
     let text: String
 }

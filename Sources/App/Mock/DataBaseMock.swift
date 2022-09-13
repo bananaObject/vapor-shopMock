@@ -38,7 +38,7 @@ final class DataBaseMock {
         var array: [ReviewResponse] = []
 
         for index in 0...40 {
-            array.append(ReviewResponse(id_user: index, name_user: "Пользователь \(index)", id_review: index, text: "review \(index)"))
+            array.append(ReviewResponse(id_user: index, user_name: "Пользователь \(index)", id_review: index, text: "review \(index)"))
         }
 
         return array
