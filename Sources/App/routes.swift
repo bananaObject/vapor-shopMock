@@ -26,5 +26,5 @@ func routes(_ app: Application) throws {
     app.post("basket", use: basketController.getBasket)
     app.post("basket", "add", use: basketController.addItem)
     app.post("basket", "remove", use: basketController.removeItem)
-    app.post("basket", "emptyBasket", use: basketController.removeAll)
+    app.post("basket", "removeAll", use: basketController.removeAll)
 }
