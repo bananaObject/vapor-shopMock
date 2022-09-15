@@ -91,4 +91,27 @@ class BasketController {
         let response = MessageResponse(message: "Succes!")
         return req.eventLoop.future(response)
     }
+
+    func pay(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
+        guard let body = try? req.content.decode(PayBasket.self) else {
+            throw Abort(.badRequest)
+        }
+
+        guard dbMock.user.authToken == body.auth_token else {
+            throw Abort(.forbidden, reason: "Bad auth token")
+        }
+
+        guard !dbMock.user.basket.isEmpty else {
+            throw Abort(.forbidden, reason: "Bad auth token")
+        }
+
+        guard !body.credit_card.isEmpty else {
+            throw Abort(.forbidden, reason: "No product to pay")
+        }
+
+        dbMock.user.clearBasket()
+
+        let response = MessageResponse(message: "Покупка успешна!")
+        return req.eventLoop.future(response)
+    }
 }
