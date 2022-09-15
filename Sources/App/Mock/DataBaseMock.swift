@@ -9,16 +9,15 @@ import Foundation
 
 /// Фиктивная база данных.
 final class DataBaseMock {
-    let user: UserMock
+    lazy var user: UserMock = UserMock(self.catalog)
 
     var catalog: [Product] = []
 
     init() {
-        self.user = UserMock()
-        createCatalog()
+        self.catalog = self.createCatalog()
     }
 
-    private func createCatalog() {
+    private func createCatalog() -> [Product] {
         var array: [Product] = []
 
         for index in (1...200) {
@@ -28,10 +27,9 @@ final class DataBaseMock {
                                  name: "Товар \(index)",
                                  price: Int.random(in: 0...100_000),
                                  description: "Мощный товар \(index)",
-                                 reviews: reviews)
-            )
+                                 reviews: reviews))
         }
-        self.catalog = array
+        return array
     }
 
     private func createReviews() -> [ReviewResponse] {

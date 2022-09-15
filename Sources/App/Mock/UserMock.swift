@@ -8,7 +8,9 @@
 import Foundation
 
 /// Фиктивные данные юзера будто из бд.
-final class UserMock: Codable {
+final class UserMock {
+    let catalog: [Product]
+
     var id: Int = 0
 
     var login: String  = "admin"
@@ -21,6 +23,45 @@ final class UserMock: Codable {
     var gender: String = "m"
     var creditCard: String = "9872389-2424-234224-234"
     var bio: String = "This is good! I think I will switch to another language"
+    var basket: [Int: Int] = [:]
+
+    init(_ catalog: [Product]) {
+        self.catalog = catalog
+    }
+
+    func getBasket() -> [BasketResponse] {
+        let array: [BasketResponse] = self.basket.compactMap { (key, value) in
+            guard self.catalog.indices.contains(key) else { return nil }
+
+            let response = self.catalog[key].getResponse()
+            return BasketResponse(quantity: value, product: response)
+        }
+        return array
+    }
+
+    func addItemInBasket(_ id: Int) {
+        guard let temp = basket[id] else {
+            basket[id] = 1
+            return
+        }
+
+        basket[id] = temp + 1
+    }
+
+    func removeItemInBasket(_ id: Int) throws {
+        guard let temp = basket[id] else { throw BasketError.noProductInBasket }
+
+        guard temp >= 2 else {
+            basket.removeValue(forKey: id)
+            return
+        }
+
+        basket[id] = temp - 1
+    }
+
+    func clearBasket() {
+        basket.removeAll()
+    }
 
     /// User info update.
     /// - Parameter request: request
