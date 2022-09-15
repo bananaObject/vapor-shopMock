@@ -31,9 +31,11 @@ final class UserMock {
 
     func getBasket() -> [BasketResponse] {
         let array: [BasketResponse] = self.basket.compactMap { (key, value) in
-            guard self.catalog.indices.contains(key) else { return nil }
+            let index = key - 1
+            
+            guard self.catalog.indices.contains(index) else { return nil }
 
-            let response = self.catalog[key].getResponse()
+            let response = self.catalog[index].getResponse()
             return BasketResponse(quantity: value, product: response)
         }
         return array
