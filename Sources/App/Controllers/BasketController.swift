@@ -102,11 +102,11 @@ class BasketController {
         }
 
         guard !dbMock.user.basket.isEmpty else {
-            throw Abort(.forbidden, reason: "Bad auth token")
+            throw Abort(.forbidden, reason: "Empty basket")
         }
 
         guard !body.credit_card.isEmpty else {
-            throw Abort(.forbidden, reason: "No product to pay")
+            throw Abort(.forbidden, reason: "Bad credit card")
         }
 
         dbMock.user.clearBasket()
