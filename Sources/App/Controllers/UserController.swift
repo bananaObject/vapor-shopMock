@@ -68,6 +68,11 @@ final class UserController {
             throw Abort(.badRequest)
         }
 
+        // выдает ошибку если токен не совпадает
+        guard body.auth_token == dbMock?.user.authToken else {
+            throw Abort(.badRequest, reason: "Bad auth token")
+        }
+
         // выдает ошибку если в запросе пустое поле
         guard !body.login.isEmpty && !body.password.isEmpty
                 && !body.firstname.isEmpty && !body.lastname.isEmpty

@@ -8,6 +8,7 @@
 import Vapor
 
 struct UserInfoRequest: Content {
+    var auth_token: String?
     var login: String
     var password: String
     var firstname: String
