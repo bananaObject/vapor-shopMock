@@ -14,6 +14,6 @@ struct GetUserInfoResponse: Content {
     var lastname: String
     var email: String
     var gender: String
-    var creditCard: String
+    var credit_card: String
     var bio: String
 }

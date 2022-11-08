@@ -127,15 +127,13 @@ final class UserController {
             throw Abort(.badRequest, reason: "Bad auth token")
         }
 
-
-
         let response = GetUserInfoResponse(login: user.login,
                                            password: user.password,
                                            firstname: user.firstname,
                                            lastname: user.lastname,
                                            email: user.email,
                                            gender: user.gender,
-                                           creditCard: user.creditCard,
+                                           credit_card: user.creditCard,
                                            bio: user.bio)
 
         
