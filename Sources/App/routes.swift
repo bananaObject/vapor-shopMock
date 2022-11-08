@@ -15,6 +15,7 @@ func routes(_ app: Application) throws {
     app.post("user", "registration", use: userController.create)
     app.post("user", "changeInfo", use: userController.changeInfo)
     app.post("user", "resetInfo", use: userController.resetInfo)
+    app.post("user", "getUserInfo", use: userController.getUserInfo)
 
     app.get("catalog", use: catalogController.catalog)
     app.get("catalog", "product", ":id", use: catalogController.product)

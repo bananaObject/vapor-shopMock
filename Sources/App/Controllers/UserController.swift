@@ -99,7 +99,7 @@ final class UserController {
     /// - Parameter req: request
     /// - Returns: result message
     func resetInfo(_ req: Request) throws -> EventLoopFuture<MessageResponse> {
-        guard let body = try? req.content.decode(ResetUserInfoRequest.self) else {
+        guard let body = try? req.content.decode(UserTokenRequest.self) else {
             throw Abort(.badRequest)
         }
 
@@ -113,6 +113,32 @@ final class UserController {
 
         let response = MessageResponse(message: "Данные сброшены!")
 
+        return req.eventLoop.future(response)
+    }
+
+    func getUserInfo(_ req: Request) throws -> EventLoopFuture<GetUserInfoResponse> {
+        guard let body = try? req.content.decode(UserTokenRequest.self) else {
+            throw Abort(.badRequest)
+        }
+
+        // выдает ошибку если токен не совпадает
+        guard body.auth_token == dbMock?.user.authToken,
+              let user = dbMock?.user else {
+            throw Abort(.badRequest, reason: "Bad auth token")
+        }
+
+
+
+        let response = GetUserInfoResponse(login: user.login,
+                                           password: user.password,
+                                           firstname: user.firstname,
+                                           lastname: user.lastname,
+                                           email: user.email,
+                                           gender: user.gender,
+                                           creditCard: user.creditCard,
+                                           bio: user.bio)
+
+        
         return req.eventLoop.future(response)
     }
 }
