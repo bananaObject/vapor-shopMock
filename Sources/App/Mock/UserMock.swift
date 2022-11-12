@@ -41,13 +41,13 @@ final class UserMock {
         return array
     }
 
-    func addItemInBasket(_ id: Int) {
+    func addItemInBasket(_ id: Int, qt: Int) {
         guard let temp = basket[id] else {
-            basket[id] = 1
+            basket[id] = qt
             return
         }
 
-        basket[id] = temp + 1
+        basket[id] = temp + qt
     }
 
     func removeItemInBasket(_ id: Int) throws {

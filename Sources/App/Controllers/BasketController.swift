@@ -50,7 +50,7 @@ class BasketController {
             throw Abort(.badRequest, reason: "Quantity cannot be less than one")
         }
 
-        dbMock.user.addItemInBasket(idProduct)
+        dbMock.user.addItemInBasket(idProduct, qt: qt)
 
         let response = MessageResponse(message: "Succes!")
         return req.eventLoop.future(response)
