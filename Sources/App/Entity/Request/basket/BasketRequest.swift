@@ -10,4 +10,5 @@ import Vapor
 struct BasketRequest: Content {
     let auth_token: String
     let id_product: Int?
+    let quantity: Int?
 }
