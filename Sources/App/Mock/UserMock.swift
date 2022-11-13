@@ -35,7 +35,7 @@ final class UserMock {
             
             guard self.catalog.indices.contains(index) else { return nil }
 
-            let response = self.catalog[index].getResponse()
+            let response = self.catalog[index].getResponseProductInfoNoDescription()
             return BasketResponse(quantity: value, product: response)
         }
         return array

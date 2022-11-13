@@ -12,5 +12,5 @@ struct ProductResponse: Content {
     let category: Int
     let name: String
     let price: Int
-    let description: String
+    let description: String?
 }

@@ -54,7 +54,7 @@ final class CatalogController {
 
         // срез каталога
         let arrayProduct: [ProductResponse] = catalog[
-            (userPage * itemOnPage - itemOnPage)..<(userPage == maxPage ? catalog.count : itemOnPage * userPage)].map { $0.getResponse() }
+            (userPage * itemOnPage - itemOnPage)..<(userPage == maxPage ? catalog.count : itemOnPage * userPage)].map { $0.getResponseProductInfoNoDescription() }
 
         let response = CatalogResponse(page_number: userPage, max_page: maxPage, products: Array(arrayProduct))
 
@@ -84,6 +84,6 @@ final class CatalogController {
             throw Abort(.badRequest, reason: "This product does not exist")
         }
 
-        return req.eventLoop.future(product.getResponse())
+        return req.eventLoop.future(product.getResponseProductInfo())
     }
 }

@@ -16,7 +16,15 @@ struct Product {
     let description: String
     var reviews: [ReviewResponse]
 
-    func getResponse() -> ProductResponse {
+    func getResponseProductInfoNoDescription() -> ProductResponse {
+        return ProductResponse(id: self.id,
+                               category: self.category,
+                               name: self.name,
+                               price: self.price,
+                               description: nil)
+    }
+
+    func getResponseProductInfo() -> ProductResponse {
         return ProductResponse(id: self.id,
                                category: self.category,
                                name: self.name,
