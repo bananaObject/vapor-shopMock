@@ -13,4 +13,5 @@ struct ProductResponse: Content {
     let name: String
     let price: Int
     let description: String?
+    let last_review: ReviewResponse?
 }

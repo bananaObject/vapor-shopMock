@@ -21,7 +21,8 @@ struct Product {
                                category: self.category,
                                name: self.name,
                                price: self.price,
-                               description: nil)
+                               description: nil,
+                               last_review: nil)
     }
 
     func getResponseProductInfo() -> ProductResponse {
@@ -29,6 +30,7 @@ struct Product {
                                category: self.category,
                                name: self.name,
                                price: self.price,
-                               description: self.description)
+                               description: self.description,
+                               last_review: self.reviews.last)
     }
 }
