@@ -84,6 +84,14 @@ final class CatalogController {
             throw Abort(.badRequest, reason: "This product does not exist")
         }
 
-        return req.eventLoop.future(product.getResponseProductInfo())
+        var qt: Int
+
+        if let id: Int = Int(id) {
+            qt = dbMock?.user.basket[id] ?? 0
+        } else {
+            qt = 0
+        }
+
+        return req.eventLoop.future(product.getResponseProductInfo(qt: qt))
     }
 }

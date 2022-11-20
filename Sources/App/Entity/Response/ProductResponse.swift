@@ -14,4 +14,5 @@ struct ProductResponse: Content {
     let price: Int
     let description: String?
     let last_review: ReviewResponse?
+    let qt: Int?
 }

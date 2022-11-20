@@ -22,15 +22,17 @@ struct Product {
                                name: self.name,
                                price: self.price,
                                description: nil,
-                               last_review: nil)
+                               last_review: nil,
+                               qt: nil)
     }
 
-    func getResponseProductInfo() -> ProductResponse {
+    func getResponseProductInfo(qt: Int) -> ProductResponse {
         return ProductResponse(id: self.id,
                                category: self.category,
                                name: self.name,
                                price: self.price,
                                description: self.description,
-                               last_review: self.reviews.last)
+                               last_review: self.reviews.last,
+                               qt: qt)
     }
 }
