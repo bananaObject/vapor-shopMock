@@ -69,8 +69,12 @@ class BasketController {
             throw Abort(.badRequest, reason: "This product does not exist")
         }
 
+        guard let qt = body.quantity, qt > 0 else {
+            throw Abort(.badRequest, reason: "Quantity cannot be less than one")
+        }
+
         do {
-            try dbMock.user.removeItemInBasket(idProduct)
+            try dbMock.user.removeItemInBasket(idProduct, qt: qt)
         } catch {
             let error = error as? BasketError
             throw Abort(.badRequest, reason: error?.rawValue)

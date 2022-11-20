@@ -50,15 +50,15 @@ final class UserMock {
         basket[id] = temp + qt
     }
 
-    func removeItemInBasket(_ id: Int) throws {
+    func removeItemInBasket(_ id: Int, qt: Int) throws {
         guard let temp = basket[id] else { throw BasketError.noProductInBasket }
 
-        guard temp >= 2 else {
+        guard temp >= qt else {
             basket.removeValue(forKey: id)
             return
         }
 
-        basket[id] = temp - 1
+        basket[id] = temp - qt
     }
 
     func clearBasket() {
