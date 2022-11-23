@@ -27,7 +27,7 @@ final class DataBaseMock {
             array.append(Product(id: index,
                                  category: index % 2 == 0 ? 1 : 2,
                                  name: "Товар \(index)",
-                                 price: Int.random(in: 0...1_000_000_),
+                                 price: Int.random(in: 1000...99_000),
                                  description: Int.random(in: 1...5) % 2 == 0 ? lorem1 : lorem2,
                                  reviews: reviews))
         }
