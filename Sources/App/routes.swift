@@ -8,7 +8,9 @@ func routes(_ app: Application) throws {
     let catalogController = CatalogController(dbMock)
     let reviewController = ReviewController(dbMock)
     let basketController = BasketController(dbMock)
-    
+    let authorController = AuthorController()
+
+    app.get("author", use: authorController.getAuthor)
     app.post("auth", "login", use: authController.login)
     app.post("auth", "logout", use: authController.logout)
 
