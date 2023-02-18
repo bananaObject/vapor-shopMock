@@ -1,0 +1,528 @@
+{
+	"info": {
+		"_postman_id": "2f7a6ae1-2627-4a62-9502-21ea5ab78d5b",
+		"name": "shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "registration user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"Somebody\",\n    \"password\": \"mypassword\",\n    \"firstname\": \"Spider\" ,\n    \"lastname\": \"Man\" ,\n    \"email\": \"some@some.ru\",\n    \"gender\": \"m\",\n    \"credit_card\": \"9872389-2424-234224-234\",\n    \"bio\": \"This is good! I think I will switch to another language\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/user/registration",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"user",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/auth/login",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/auth/logout",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change user info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\",\n    \"login\": \"1\",\n    \"password\": \"1\",\n    \"firstname\": \"1\" ,\n    \"lastname\": \"1\" ,\n    \"email\": \"1\",\n    \"gender\": \"1\",\n    \"credit_card\": \"1\",\n    \"bio\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/user/changeInfo",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"user",
+								"changeInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/user/getUserInfo",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"user",
+								"getUserInfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "catalog",
+			"item": [
+				{
+					"name": "catalog",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://shopmock.fly.dev/catalog?page_number=1&id_category=1",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"catalog"
+							],
+							"query": [
+								{
+									"key": "page_number",
+									"value": "1"
+								},
+								{
+									"key": "id_category",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://shopmock.fly.dev/catalog/product/1",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"catalog",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "reviews product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://shopmock.fly.dev/catalog/product/1/reviews?page_number=2",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"catalog",
+								"product",
+								"1",
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "page_number",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\",\n    \"text\": \"awf[akwf[jp03hf 209jf02f0 20jf9823 h9fh 923fh9\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/catalog/product/1/review/add",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"catalog",
+								"product",
+								"1",
+								"review",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\",\n    \"id_review\": 4843\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/catalog/product/1/review/delete",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"catalog",
+								"product",
+								"1",
+								"review",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "basket",
+			"item": [
+				{
+					"name": "basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/basket",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"basket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\",\n    \"id_product\": 1, \n    \"quantity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/basket/add",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"basket",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove item to basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\",\n    \"id_product\": 1, \n    \"quantity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/basket/remove",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"basket",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove all to basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/basket/removeAll",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"basket",
+								"removeAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pay to basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"credit_card\": \"9872389-2424-234224-234\",\n    \"auth_token\": \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://shopmock.fly.dev/basket/pay",
+							"protocol": "https",
+							"host": [
+								"shopmock",
+								"fly",
+								"dev"
+							],
+							"path": [
+								"basket",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reset user info (for test)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"auth_token\" : \"905ef89d-25a4-4255-902f-fafd4f6a9774\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shopmock.fly.dev/user/resetInfo",
+					"protocol": "https",
+					"host": [
+						"shopmock",
+						"fly",
+						"dev"
+					],
+					"path": [
+						"user",
+						"resetInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://shopmock.fly.dev/author",
+					"protocol": "https",
+					"host": [
+						"shopmock",
+						"fly",
+						"dev"
+					],
+					"path": [
+						"author"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
