@@ -15,4 +15,6 @@ struct ProductResponse: Content {
     let description: String?
     let last_review: ReviewResponse?
     let qt: Int?
+    var image: String?
+    var images: [String]?
 }

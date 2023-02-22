@@ -15,6 +15,10 @@ struct Product {
     let price: Int
     let description: String
     var reviews: [ReviewResponse]
+    var images: [String] = ["https://i.ibb.co/jVNfn5n/box-svgrepo-com-2.png",
+                            "https://i.ibb.co/Xkzdm4j/product-delivery-ecommerce-svgrepo-com.png",
+                            "https://i.ibb.co/HKRwX1h/marketing-pricing-pricing-tag-svgrepo-com.png",
+                            "https://i.ibb.co/nLHq5nt/integration-like-social-svgrepo-com.png"]
 
     func getResponseProductInfoNoDescription() -> ProductResponse {
         return ProductResponse(id: self.id,
@@ -23,7 +27,8 @@ struct Product {
                                price: self.price,
                                description: nil,
                                last_review: nil,
-                               qt: nil)
+                               qt: nil,
+                               image: images[0])
     }
 
     func getResponseProductInfo(qt: Int) -> ProductResponse {
@@ -33,6 +38,7 @@ struct Product {
                                price: self.price,
                                description: self.description,
                                last_review: self.reviews.last,
-                               qt: qt)
+                               qt: qt,
+                               images: images)
     }
 }
