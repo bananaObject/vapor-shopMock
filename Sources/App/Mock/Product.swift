@@ -15,10 +15,10 @@ struct Product {
     let price: Int
     let description: String
     var reviews: [ReviewResponse]
-    var images: [String] = ["https://i.ibb.co/jVNfn5n/box-svgrepo-com-2.png",
-                            "https://i.ibb.co/Xkzdm4j/product-delivery-ecommerce-svgrepo-com.png",
-                            "https://i.ibb.co/HKRwX1h/marketing-pricing-pricing-tag-svgrepo-com.png",
-                            "https://i.ibb.co/nLHq5nt/integration-like-social-svgrepo-com.png"]
+    var images: [String] = ["https://i.ibb.co/M6JGqvV/download.png",
+                            "https://i.ibb.co/54BGczf/offer-hot-product-fire-svgrepo-com.png",
+                            "https://i.ibb.co/DVN3cbx/product-delivery-ecommerce-svgrepo-com.png",
+                            "https://i.ibb.co/frBw58P/pet-bath-product-svgrepo-com.png"]
 
     func getResponseProductInfoNoDescription() -> ProductResponse {
         return ProductResponse(id: self.id,
