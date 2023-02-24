@@ -44,6 +44,6 @@ struct Product {
                                description: self.description,
                                last_review: self.reviews.last,
                                qt: qt,
-                               images: images)
+                               images: images.shuffled())
     }
 }
