@@ -15,12 +15,15 @@ struct Product {
     let price: Int
     let description: String
     var reviews: [ReviewResponse]
-    var images: [String] = ["https://i.ibb.co/gwx9KRB/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
+    var image: String = Product.smallImages.randomElement() ?? ""
+    var images: [String] = Product.images.shuffled()
+
+    static let images: [String] = ["https://i.ibb.co/gwx9KRB/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
                             "https://i.ibb.co/b1wTNDR/076697a6-f720-4f94-b364-6853e9bd4083.png",
                             "https://i.ibb.co/vw8gvfh/C8f2a301-f844-4b77-948c-b842e85c7709.png",
                             "https://i.ibb.co/TbVSjQX/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png"]
 
-    var smallImages: [String] = ["https://i.ibb.co/Qfj4y9M/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
+    static let smallImages: [String] = ["https://i.ibb.co/Qfj4y9M/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
                                  "https://i.ibb.co/nB7SZLQ/076697a6-f720-4f94-b364-6853e9bd4083.png",
                                  "https://i.ibb.co/sbckT9p/C8f2a301-f844-4b77-948c-b842e85c7709.png",
                                  "https://i.ibb.co/2jm4KMw/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png"]
@@ -33,7 +36,7 @@ struct Product {
                                description: nil,
                                last_review: nil,
                                qt: nil,
-                               image: smallImages.randomElement())
+                               image: image)
     }
 
     func getResponseProductInfo(qt: Int) -> ProductResponse {
@@ -44,6 +47,6 @@ struct Product {
                                description: self.description,
                                last_review: self.reviews.last,
                                qt: qt,
-                               images: images.shuffled())
+                               images: images)
     }
 }
