@@ -15,12 +15,24 @@ final class DataBaseMock {
     lazy var images: [String] = ["https://i.ibb.co/gwx9KRB/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
                                  "https://i.ibb.co/b1wTNDR/076697a6-f720-4f94-b364-6853e9bd4083.png",
                                  "https://i.ibb.co/vw8gvfh/C8f2a301-f844-4b77-948c-b842e85c7709.png",
-                                 "https://i.ibb.co/TbVSjQX/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png"]
+                                 "https://i.ibb.co/TbVSjQX/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png",
+                                 "https://i.ibb.co/Xj5sn4C/Bicycle-1-svgrepo-com.png",
+                                 "https://i.ibb.co/HxKNC0Q/Sale-free-6-svgrepo-com.png",
+                                 "https://i.ibb.co/SJ6V35J/Brand-apple-svgrepo-com.png",
+                                 "https://i.ibb.co/FnjXsL8/Products-wine-svgrepo-com.png",
+                                 "https://i.ibb.co/7b13M36/Television-svgrepo-com.png",
+                                 "https://i.ibb.co/Tqm01jm/Wash-svgrepo-com.png"]
 
     lazy var smallImages: [String] = ["https://i.ibb.co/Qfj4y9M/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
                                       "https://i.ibb.co/nB7SZLQ/076697a6-f720-4f94-b364-6853e9bd4083.png",
                                       "https://i.ibb.co/sbckT9p/C8f2a301-f844-4b77-948c-b842e85c7709.png",
-                                      "https://i.ibb.co/2jm4KMw/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png"]
+                                      "https://i.ibb.co/2jm4KMw/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png",
+                                      "https://i.ibb.co/887S1F8/Bicycle-1-svgrepo-com.png",
+                                      "https://i.ibb.co/3BM0TwL/Sale-free-6-svgrepo-com.png",
+                                      "https://i.ibb.co/T8MB8Bj/Brand-apple-svgrepo-com.png",
+                                      "https://i.ibb.co/0C4Sb5R/Products-wine-svgrepo-com.png",
+                                      "https://i.ibb.co/2sPj7yV/Television-svgrepo-com.png",
+                                      "https://i.ibb.co/pL69gft/Wash-svgrepo-com.png"]
 
 
     var catalog: [Product] = []
@@ -34,19 +46,36 @@ final class DataBaseMock {
 
         for index in (1...200) {
             let reviews = createReviews()
-            var intRandom = Int.random(in: 0..<smallImages.endIndex)
-            var image: String = smallImages[intRandom]
-            var images: [String] = [images[intRandom]] + images.enumerated().compactMap({ index, item in
-                return index != intRandom ? item : nil
-            })[0..<Int.random(in: 1..<images.endIndex - 1)]
-            array.append(Product(id: index,
-                                 category: index % 2 == 0 ? 1 : 2,
-                                 name: "Товар \(index)",
-                                 price: Int.random(in: 1000...99_000),
-                                 description: Int.random(in: 1...5) % 2 == 0 ? lorem1 : lorem2,
-                                 reviews: reviews,
-                                 image: image,
-                                 images: images))
+            if smallImages.isEmpty {
+                smallImages = ["https://i.ibb.co/Qfj4y9M/06764f7f-62e8-4672-8f7a-6ebc7af537df.png",
+                               "https://i.ibb.co/nB7SZLQ/076697a6-f720-4f94-b364-6853e9bd4083.png",
+                               "https://i.ibb.co/sbckT9p/C8f2a301-f844-4b77-948c-b842e85c7709.png",
+                               "https://i.ibb.co/2jm4KMw/8c38e551-8cd0-41f8-9d3a-8d36b7a43243.png",
+                               "https://i.ibb.co/887S1F8/Bicycle-1-svgrepo-com.png",
+                               "https://i.ibb.co/3BM0TwL/Sale-free-6-svgrepo-com.png",
+                               "https://i.ibb.co/T8MB8Bj/Brand-apple-svgrepo-com.png",
+                               "https://i.ibb.co/0C4Sb5R/Products-wine-svgrepo-com.png",
+                               "https://i.ibb.co/2sPj7yV/Television-svgrepo-com.png",
+                               "https://i.ibb.co/pL69gft/Wash-svgrepo-com.png"]
+            }
+            let indexImg = Int.random(in: 0..<smallImages.endIndex)
+
+            if let key = smallImages[indexImg].split(separator: "/").last,
+               let currentIndex = images.firstIndex(where: { $0.contains(key)})
+            {
+                let image: String = smallImages.remove(at: indexImg)
+                let images: [String] = [images[currentIndex]] + images.enumerated().compactMap({ index, item in
+                    return index != currentIndex && Bool.random() ? item : nil
+                })
+                array.append(Product(id: index,
+                                     category: index % 2 == 0 ? 1 : 2,
+                                     name: "Товар \(index)",
+                                     price: Int.random(in: 1000...99_000),
+                                     description: Int.random(in: 1...5) % 2 == 0 ? lorem1 : lorem2,
+                                     reviews: reviews,
+                                     image: image,
+                                     images: images))
+            }
         }
         return array
     }
