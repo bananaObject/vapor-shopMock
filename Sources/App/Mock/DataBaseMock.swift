@@ -36,7 +36,7 @@ final class DataBaseMock {
             let reviews = createReviews()
             var intRandom = Int.random(in: 0..<smallImages.endIndex)
             var image: String = smallImages[intRandom]
-            var images: [String] = [images[intRandom]] + images.enumerated().compactMap({ index, item in
+            var images: [String] = [images[intRandom]] + images[0..<images.endIndex - 1].enumerated().compactMap({ index, item in
                 return index != intRandom ? item : nil
             })
             array.append(Product(id: index,
